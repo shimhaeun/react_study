@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import TOC from './components/TOC';
 import Subject from './components/Subject';
 import Content from './components/Content'
-import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: 'read',
+      // mode: 'read',
       mode: 'welcome',
-      subject: {title:'WEB', sub:"world wide web"},
       welcome: {title:'Welcome', desc: "hello, React!"},
+      subject: {title:'WEB', sub:"world wide web"},
       contents: [
         {id:1, title: 'HTML', desc:'HTML is for information'},
         {id:2, title: 'CSS', desc:'CSS is for design'},
@@ -26,26 +25,40 @@ class App extends Component {
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
     } else if(this.state.mode === 'read') {
+      if(this.state.selected_id === 1){
       _title = this.state.contents[0].title;
       _desc = this.state.contents[0].desc;
     }
+    if(this.state.selected_id === 1){
+      _title = this.state.contents[1].title;
+      _desc = this.state.contents[1].desc;
+    }
+    if(this.state.selected_id === 2 ){
+      _title = this.state.contents[2].title;
+      _desc = this.state.contents[2].desc;
+      }
+    }
     return (
       <div className='App'>
-        {/* <Subject
+        <Subject
         title={this.state.subject.title}
-        sub={this.state.subject.sub}></Subject> */}
-        <header>
-        <h1><a href="/" onClick={function (e){
-          console.log(e);
-          e.preventDefault();
-          alert("hihi");
-        }}>{this.state.subject.title}</a></h1>
-        {this.props.desc}
-      </header>
-        <TOC data={this.state.contents}></TOC>
+        sub={this.state.subject.sub}
+        onChangePage={function () {
+        // alert("Hello!");
+        this.setState({
+          mode:'welcome'
+        });}.bind(this)}></Subject>
+      
+        <TOC 
+        data={this.state.contents}
+        onChangePage={function (id) {
+          this.setState({
+            mode:'read',
+            selected_id:id
+          });}.bind(this)}></TOC>
         <Content title={_title} desc={_desc}></Content>
       </div>
     );
-}
+  }
 }
 export default App;

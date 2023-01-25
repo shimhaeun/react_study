@@ -4,17 +4,24 @@ import React, { Component } from 'react';
 class TOC extends Component {
     render () {
         console.log('TOC Render');
-        var lists = [];
-        var data = this.props.data;
-        var i = 0;
-        while(i < data.length) {
-          lists.push(<li key={data[i].id}><a href={"/content/"+data[i].id}>{data[i].title}</a></li>);
-          i = i + 1;
-        }
         return (
         <nav>
           <ul>
-              {lists}
+              <li><a href="1.html" 
+              onClick={function (e) {
+                e.preventDefault();
+                this.props.onChangePage(0);
+                }.bind(this)}>HTML</a></li>
+              <li><a href="2.html"
+              onClick={function (e) {
+                e.preventDefault();
+                this.props.onChangePage(1);
+                }.bind(this)}>CSS</a></li>
+              <li><a href="3.html"
+              onClick={function (e) {
+                e.preventDefault();
+                this.props.onChangePage(2);
+                }.bind(this)}>JavaScript</a></li>
           </ul>
         </nav>
       )
