@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TOC from "./components/TOC";
-import Content from "./components/Content";
+import ReadContent from "./components/ReadContent";
 import Subject from "./components/Subject";
 import Control from "./components/Control";
 import CreateContent from "./components/CreateContent";
@@ -40,10 +40,10 @@ class App extends Component {
     if(this.state.mode === 'welcome') {
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
-      _article = <Content title={_title} desc={_desc}></Content>
+      _article = <ReadContent title={_title} desc={_desc}></ReadContent>
     } else if(this.state.mode === 'read') {
       var _content = this.getReadContent();
-      _article = <Content title={_content.title} desc={_content.desc}></Content>
+      _article = <ReadContent title={_content.title} desc={_content.desc}></ReadContent>
     } else if(this.state.mode === 'create') {
       _article = <CreateContent onSubmit={function(_title, _desc) {
         this.max_content_id = this.max_content_id+1;
@@ -52,7 +52,7 @@ class App extends Component {
           {id:this.max_content_id, title:_title, desc:_desc}
         ); */
 
-        /* var _content = this.state.contents.concat(
+        /* var _content = this.state.2contents.concat(
           {id:this.max_content_id, title:_title, desc:_desc}
         ); */
 
