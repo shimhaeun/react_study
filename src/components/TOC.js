@@ -1,30 +1,33 @@
 import React, { Component } from 'react';
 
-
 class TOC extends Component {
-    render () {
-        console.log('TOC Render');
-        return (
-        <nav>
-          <ul>
-              <li><a href="1.html" 
-              onClick={function (e) {
-                e.preventDefault();
-                this.props.onChangePage(0);
-                }.bind(this)}>HTML</a></li>
-              <li><a href="2.html"
-              onClick={function (e) {
-                e.preventDefault();
-                this.props.onChangePage(1);
-                }.bind(this)}>CSS</a></li>
-              <li><a href="3.html"
-              onClick={function (e) {
-                e.preventDefault();
-                this.props.onChangePage(2);
-                }.bind(this)}>JavaScript</a></li>
-          </ul>
-        </nav>
-      )
+  render() {
+    console.log('TOC.js 렌더링 완료');
+    var lists = [];
+    var data = this.props.data;
+    var i = 0;
+    while(i < data.length) {
+      lists.push(
+        <li key={data[i].id}>
+          <a 
+            href={"/content/"+data[i].id}
+            // data-id={data[i].id} // 삭제
+            onClick={function (id, e) {
+              // debugger;
+              e.preventDefault();
+              this.props.onChangePage(id);
+            }.bind(this, data[i].id)} // bind에 추가한 속성이 function의 매개변수에 우선 할당
+          >{data[i].title}</a></li>);
+      i = i + 1;
     }
+    return (
+      <nav>
+          <ul>
+            {lists}
+          </ul>
+      </nav>
+    );
   }
-  export default TOC;
+}
+
+export default TOC; 
