@@ -127,8 +127,8 @@ class App extends Component {
             function(_mode){
               if(_mode === 'delete') {
                 if(window.confirm('정말 삭제하시겠습니까?')) {
-                  var _contents = Array.from(this.state.contents);
-                  var i = 0;
+                  var _contents = Array.from(this.state.contents); // immutable?
+                  var i = 0; 
                   while(i < _contents.length) {
                     if(_contents[i].id === this.state.selected_content_id) {
                       _contents.splice(i,1);
